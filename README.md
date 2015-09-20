@@ -1,10 +1,10 @@
+![SmallWorld Logo](https://raw.githubusercontent.com/Julien-Marcou/SmallWorld/master/Resources/SmallWorldLogo.png)
+
 SmallWorld
 ===========
 
-SmallWorld is 2-player tactical game.  
+SmallWorld is a 2-player tactical game.  
 Players can only play one at a time on a local computer (turn based game).
-
-![SmallWorld Logo](https://raw.githubusercontent.com/Julien-Marcou/SmallWorld/master/Resources/SmallWorldLogo.png)
 
 
 Features
@@ -23,7 +23,7 @@ Features
 Create a new game
 -----------
 
-Select one of the available map, then each player can choose his own
+Select one of the available maps, then each player can choose his own
 - Pseudo
 - Faction
 - Color
