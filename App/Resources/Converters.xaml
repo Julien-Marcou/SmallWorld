@@ -1,0 +1,13 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:converters="clr-namespace:SmallWorld.Converters">
+
+    <converters:AxialToPixel x:Key="AxialToPixel"/>
+    <converters:BooleanToVisibility x:Key="BooleanToVisibility"/>
+    <converters:ColorToBrush x:Key="ColorToBrush"/>
+    <converters:ItemsEqualToBoolean x:Key="ItemsEqualToBoolean"/>
+    <converters:ItemsEqualToVisibility x:Key="ItemsEqualToVisibility"/>
+    <converters:MapSizeToCanvasSize x:Key="MapSizeToCanvasSize"/>
+    <converters:StringToStyle x:Key="StringToStyle"/>
+
+</ResourceDictionary>

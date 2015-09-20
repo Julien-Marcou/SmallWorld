@@ -1,0 +1,32 @@
+﻿<Button x:Class="SmallWorld.Controls.Tile"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+        xmlns:local="clr-namespace:SmallWorld.Controls" 
+        mc:Ignorable="d" 
+        d:DesignHeight="156" d:DesignWidth="136"
+        x:Name="CurrentTile">
+
+    <Button.Template>
+        <ControlTemplate TargetType="Button">
+            <Grid>
+
+                <Polygon Style="{Binding Tag.Type, ElementName=CurrentTile, Converter={StaticResource StringToStyle}, FallbackValue={StaticResource NullTileFallback}}"/>
+
+                <Polygon Style="{StaticResource OveredTile}">
+                    <Polygon.Visibility>
+                        <MultiBinding Converter="{StaticResource ItemsEqualToVisibility}" FallbackValue="Collapsed">
+                            <Binding Path="Coordinates"/>
+                            <Binding Path="DataContext.OveredTile" RelativeSource="{RelativeSource AncestorType=local:Map}"/>
+                        </MultiBinding>
+                    </Polygon.Visibility>
+                </Polygon>
+                
+                <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+
+            </Grid>
+        </ControlTemplate>
+    </Button.Template>
+
+</Button>

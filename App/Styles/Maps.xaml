@@ -1,0 +1,45 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <Style x:Key="BaseMap" TargetType="Panel">
+        <Setter Property="SnapsToDevicePixels" Value="True"/>
+        <Setter Property="UseLayoutRounding" Value="True"/>
+    </Style>
+
+    <Style x:Key="DeserticMap" TargetType="Panel" BasedOn="{StaticResource BaseMap}">
+        <Setter Property="Background">
+            <Setter.Value>
+                <VisualBrush Viewport="0 0 268 312" Viewbox="0 0 268 312" Stretch="None" TileMode="Tile" ViewportUnits="Absolute" ViewboxUnits="Absolute">
+                    <VisualBrush.Visual>
+                        <Image Source="/Resources/Images/Maps.png" SnapsToDevicePixels="True" RenderOptions.BitmapScalingMode="NearestNeighbor"/>
+                    </VisualBrush.Visual>
+                </VisualBrush>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style x:Key="VegetalMap" TargetType="Panel" BasedOn="{StaticResource BaseMap}">
+        <Setter Property="Background">
+            <Setter.Value>
+                <VisualBrush Viewport="0 0 268 312" Viewbox="268 0 268 312" Stretch="None" TileMode="Tile" ViewportUnits="Absolute" ViewboxUnits="Absolute">
+                    <VisualBrush.Visual>
+                        <Image Source="/Resources/Images/Maps.png" SnapsToDevicePixels="True" RenderOptions.BitmapScalingMode="NearestNeighbor"/>
+                    </VisualBrush.Visual>
+                </VisualBrush>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style x:Key="SwampMap" TargetType="Panel" BasedOn="{StaticResource VegetalMap}"></Style>
+
+    <Style x:Key="SmallMap" TargetType="Panel" BasedOn="{StaticResource VegetalMap}"></Style>
+
+    <Style x:Key="NormalMap" TargetType="Panel" BasedOn="{StaticResource VegetalMap}"></Style>
+
+    <Style x:Key="BigMap" TargetType="Panel" BasedOn="{StaticResource VegetalMap}"></Style>
+
+    <Style x:Key="CustomMap" TargetType="Panel" BasedOn="{StaticResource VegetalMap}"></Style>
+
+    <Style x:Key="NullMapFallback" TargetType="Panel" BasedOn="{StaticResource VegetalMap}"></Style>
+
+</ResourceDictionary>

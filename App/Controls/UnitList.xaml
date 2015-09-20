@@ -1,0 +1,148 @@
+﻿<UserControl x:Class="SmallWorld.Controls.UnitList"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             mc:Ignorable="d" 
+             d:DesignHeight="420" d:DesignWidth="255">
+
+    <UserControl.Resources>
+        <Style TargetType="ItemsControl" BasedOn="{StaticResource UnfocusableControl}"/>
+    </UserControl.Resources>
+
+    <ScrollViewer Style="{StaticResource CustomScrollViewer}" PanningMode="VerticalOnly" VerticalScrollBarVisibility="Auto">
+        <ItemsControl DataContext="{Binding Map.SelectedUnits}" ItemsSource="{Binding Units}">
+            <ItemsControl.Resources>
+                <Style TargetType="Button">
+                    <Setter Property="OverridesDefaultStyle" Value="True"/>
+                    <Setter Property="Cursor" Value="Hand"/>
+                    <Setter Property="Background" Value="Transparent"/>
+                    <Setter Property="BorderThickness" Value="1"/>
+                    <Setter Property="BorderBrush">
+                        <Setter.Value>
+                            <DrawingBrush Viewport="0,0,8,8" ViewportUnits="Absolute" TileMode="Tile">
+                                <DrawingBrush.Drawing>
+                                    <DrawingGroup>
+                                        <GeometryDrawing Brush="#99333333">
+                                            <GeometryDrawing.Geometry>
+                                                <GeometryGroup>
+                                                    <RectangleGeometry Rect="0,0,50,50" />
+                                                    <RectangleGeometry Rect="50,50,50,50" />
+                                                </GeometryGroup>
+                                            </GeometryDrawing.Geometry>
+                                        </GeometryDrawing>
+                                    </DrawingGroup>
+                                </DrawingBrush.Drawing>
+                            </DrawingBrush>
+                        </Setter.Value>
+                    </Setter>
+                    <Setter Property="Template">
+                        <Setter.Value>
+                            <ControlTemplate TargetType="Button">
+                                <Border Background="{TemplateBinding Background}" BorderThickness="{TemplateBinding BorderThickness}" BorderBrush="{TemplateBinding BorderBrush}" CornerRadius="3" Padding="{TemplateBinding Padding}">
+                                    <ContentPresenter/>
+                                </Border>
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>
+                    <Style.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="Background" Value="#66FFEEBB"/>
+                            <Setter Property="BorderBrush" Value="#66666666"/>
+                        </Trigger>
+                        <Trigger Property="IsEnabled" Value="False">
+                            <Setter Property="Cursor" Value="Arrow"/>
+                            <Setter Property="Background" Value="#66FFFFFF"/>
+                            <Setter Property="BorderBrush" Value="#99333333"/>
+                        </Trigger>
+                    </Style.Triggers>
+                </Style>
+            </ItemsControl.Resources>
+            <ItemsControl.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <UniformGrid VerticalAlignment="Top" Columns="2" Margin="3 0 3 10"/>
+                </ItemsPanelTemplate>
+            </ItemsControl.ItemsPanel>
+            <ItemsControl.ItemTemplate>
+                <ItemContainerTemplate>
+                    <Button Width="118" Margin="3" Padding="6 0 6 6" Command="{Binding DataContext.Map.SelectUnitCommand, RelativeSource={RelativeSource AncestorType=UserControl}}" CommandParameter="{Binding}">
+                        <Button.IsEnabled>
+                            <MultiBinding Converter="{StaticResource ItemsEqualToBoolean}" ConverterParameter="ReverseBoolean">
+                                <Binding Path="."/>
+                                <Binding Path="DataContext.Map.SelectedUnit" RelativeSource="{RelativeSource AncestorType=UserControl}"/>
+                            </MultiBinding>
+                        </Button.IsEnabled>
+                        <Grid>
+
+                            <Rectangle VerticalAlignment="Top" Style="{Binding DataContext.Type, RelativeSource={RelativeSource AncestorType=ItemsControl}, Converter={StaticResource StringToStyle}}"/>
+
+                            <StackPanel VerticalAlignment="Bottom" Margin="0 50 0 0" Orientation="Horizontal">
+
+                                <StackPanel Orientation="Vertical" Margin="0 0 10 0" VerticalAlignment="Center">
+                                    <Rectangle HorizontalAlignment="Center" Width="14" Height="14" ClipToBounds="False">
+                                        <Rectangle.Fill>
+                                            <VisualBrush Stretch="Uniform" Visual="{StaticResource IconHeart}"/>
+                                        </Rectangle.Fill>
+                                    </Rectangle>
+                                    <TextBlock HorizontalAlignment="Center" TextAlignment="Center" FontSize="13">
+                                        <TextBlock.Text>
+                                            <MultiBinding StringFormat="{}{0}/{1}">
+                                                <Binding Path="HealthPoints"/>
+                                                <Binding Path="MaxHealthPoints"/>
+                                            </MultiBinding>
+                                        </TextBlock.Text>
+                                    </TextBlock>
+                                </StackPanel>
+
+                                <StackPanel Orientation="Vertical" Margin="0 0 10 0" VerticalAlignment="Center">
+                                    <Rectangle HorizontalAlignment="Center" Width="14" Height="14" ClipToBounds="False">
+                                        <Rectangle.Fill>
+                                            <VisualBrush Stretch="Uniform" Visual="{StaticResource IconSword}"/>
+                                        </Rectangle.Fill>
+                                    </Rectangle>
+                                    <TextBlock HorizontalAlignment="Center" TextAlignment="Center" FontSize="13">
+                                        <TextBlock.Text>
+                                            <Binding Path="AttackPoints"/>
+                                        </TextBlock.Text>
+                                    </TextBlock>
+                                </StackPanel>
+
+                                <StackPanel Orientation="Vertical" Margin="0 0 10 0" VerticalAlignment="Center">
+                                    <Rectangle HorizontalAlignment="Center" Width="14" Height="14" ClipToBounds="False">
+                                        <Rectangle.Fill>
+                                            <VisualBrush Stretch="Uniform" Visual="{StaticResource IconShield}"/>
+                                        </Rectangle.Fill>
+                                    </Rectangle>
+                                    <TextBlock HorizontalAlignment="Center" TextAlignment="Center" FontSize="13">
+                                        <TextBlock.Text>
+                                            <Binding Path="DefensePoints"/>
+                                        </TextBlock.Text>
+                                    </TextBlock>
+                                </StackPanel>
+
+                                <StackPanel Orientation="Vertical" VerticalAlignment="Center">
+                                    <Rectangle HorizontalAlignment="Center" Width="14" Height="14" ClipToBounds="False">
+                                        <Rectangle.Fill>
+                                            <VisualBrush Stretch="Uniform" Visual="{StaticResource IconFootprints}"/>
+                                        </Rectangle.Fill>
+                                    </Rectangle>
+                                    <TextBlock HorizontalAlignment="Center" TextAlignment="Center" FontSize="13">
+                                        <TextBlock.Text>
+                                            <MultiBinding StringFormat="{}{0}/{1}">
+                                                <Binding Path="MovementPoints"/>
+                                                <Binding Path="MaxMovementPoints"/>
+                                            </MultiBinding>
+                                        </TextBlock.Text>
+                                    </TextBlock>
+                                </StackPanel>
+
+                            </StackPanel>
+
+                        </Grid>
+                    </Button>
+                </ItemContainerTemplate>
+            </ItemsControl.ItemTemplate>
+        </ItemsControl>
+    </ScrollViewer>
+
+</UserControl>

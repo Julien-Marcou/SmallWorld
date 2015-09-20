@@ -1,0 +1,97 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <MinimumVisualStudioVersion>12.0</MinimumVisualStudioVersion>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{A0E320D9-1325-48E1-9A92-0CE3322089AD}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>SmallWorld.Models</RootNamespace>
+    <AssemblyName>SmallWorld.Models</AssemblyName>
+    <DefaultLanguage>en-US</DefaultLanguage>
+    <FileAlignment>512</FileAlignment>
+    <ProjectTypeGuids>{786C830F-07A1-408B-BD7F-6EE04809D6DB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <TargetFrameworkProfile>Profile44</TargetFrameworkProfile>
+    <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <!-- A reference to the entire .NET Framework is automatically included -->
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="AI\AIFactory.cs" />
+    <Compile Include="AI\ArtificialIntelligence.cs" />
+    <Compile Include="AI\DijkstraAI.cs" />
+    <Compile Include="AI\RandomAI.cs" />
+    <Compile Include="Factions\DwarfFaction.cs" />
+    <Compile Include="Factions\ElfFaction.cs" />
+    <Compile Include="Factions\Faction.cs" />
+    <Compile Include="Factions\FactionFactory.cs" />
+    <Compile Include="Factions\SlimeFaction.cs" />
+    <Compile Include="Factions\KnightFaction.cs" />
+    <Compile Include="Factions\OrcFaction.cs" />
+    <Compile Include="Game.cs" />
+    <Compile Include="Interfaces\IArtificialIntelligence.cs" />
+    <Compile Include="Interfaces\IFaction.cs" />
+    <Compile Include="Interfaces\IGame.cs" />
+    <Compile Include="Interfaces\IMap.cs" />
+    <Compile Include="Interfaces\IPlayer.cs" />
+    <Compile Include="Interfaces\ITile.cs" />
+    <Compile Include="Interfaces\IUnit.cs" />
+    <Compile Include="Maps\BigMap.cs" />
+    <Compile Include="Maps\CustomMap.cs" />
+    <Compile Include="Maps\DeserticMap.cs" />
+    <Compile Include="Maps\Map.cs" />
+    <Compile Include="Maps\MapFactory.cs" />
+    <Compile Include="Maps\NormalMap.cs" />
+    <Compile Include="Maps\SmallMap.cs" />
+    <Compile Include="Maps\SwampMap.cs" />
+    <Compile Include="Maps\VegetalMap.cs" />
+    <Compile Include="Player.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Tiles\SwampTile.cs" />
+    <Compile Include="Tiles\DesertTile.cs" />
+    <Compile Include="Tiles\ForestTile.cs" />
+    <Compile Include="Tiles\MountainTile.cs" />
+    <Compile Include="Tiles\PlainTile.cs" />
+    <Compile Include="Tiles\SeaTile.cs" />
+    <Compile Include="Tiles\Tile.cs" />
+    <Compile Include="Tiles\TileFactory.cs" />
+    <Compile Include="Units\DwarfUnit.cs" />
+    <Compile Include="Units\ElfUnit.cs" />
+    <Compile Include="Units\SlimeUnit.cs" />
+    <Compile Include="Units\KnightUnit.cs" />
+    <Compile Include="Units\OrcUnit.cs" />
+    <Compile Include="Units\Unit.cs" />
+    <Compile Include="Utils\Color.cs" />
+    <Compile Include="Utils\GameSerialization.cs" />
+    <Compile Include="Utils\Point.cs" />
+    <Compile Include="Utils\Size.cs" />
+  </ItemGroup>
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

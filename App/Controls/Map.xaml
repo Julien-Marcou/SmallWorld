@@ -1,0 +1,128 @@
+﻿<UserControl x:Class="SmallWorld.Controls.Map"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:SmallWorld.Controls" 
+             xmlns:system="clr-namespace:System;assembly=mscorlib"
+             xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity" 
+             mc:Ignorable="d" 
+             d:DesignHeight="300" d:DesignWidth="300"
+             x:Name="CurrentMap">
+
+    <UserControl.Resources>
+        <Style TargetType="local:Tile" BasedOn="{StaticResource UnfocusableControl}"/>
+        <Style TargetType="local:ReachableTile" BasedOn="{StaticResource UnfocusableControl}"/>
+        <Style TargetType="local:Unit" BasedOn="{StaticResource UnfocusableControl}"/>
+        <Style TargetType="ItemsControl" BasedOn="{StaticResource UnfocusableControl}"/>
+    </UserControl.Resources>
+
+    <ScrollViewer Style="{StaticResource CustomScrollViewer}" PanningMode="Both" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto" ManipulationBoundaryFeedback="ScrollViewer_ManipulationBoundaryFeedback">
+        <Grid Style="{Binding Type, Converter={StaticResource StringToStyle}, FallbackValue={StaticResource NormalMap}}" UseLayoutRounding="True" SnapsToDevicePixels="True">
+            
+            <Grid.LayoutTransform>
+                <ScaleTransform x:Name="MapZoom" ScaleX="1" ScaleY="1"/>
+            </Grid.LayoutTransform>
+            
+            <Canvas Margin="50 45"
+                    Width="{Binding Size, Converter={StaticResource MapSizeToCanvasSize}, ConverterParameter=Width}"
+                    Height="{Binding Size, Converter={StaticResource MapSizeToCanvasSize}, ConverterParameter=Height}">
+
+                <!-- List of map tiles -->
+                <ItemsControl ItemsSource="{Binding Tiles}">
+
+                    <ItemsControl.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <Canvas/>
+                        </ItemsPanelTemplate>
+                    </ItemsControl.ItemsPanel>
+
+                    <ItemsControl.ItemContainerStyle>
+                        <Style TargetType="ContentPresenter">
+                            <Setter Property="Canvas.Left" Value="{Binding Coordinates, Converter={StaticResource AxialToPixel}, ConverterParameter=X}"/>
+                            <Setter Property="Canvas.Top" Value="{Binding Coordinates, Converter={StaticResource AxialToPixel}, ConverterParameter=Y}"/>
+                        </Style>
+                    </ItemsControl.ItemContainerStyle>
+
+                    <ItemsControl.ItemTemplate>
+                        <ItemContainerTemplate>
+                            <local:Tile
+                                Tag="{Binding}"
+                                Command="{Binding DataContext.SelectTileCommand, ElementName=CurrentMap}"
+                                CommandParameter="{Binding Coordinates}">
+
+                                <i:Interaction.Triggers>
+                                    <i:EventTrigger EventName="MouseEnter">
+                                        <i:InvokeCommandAction
+                                            Command="{Binding DataContext.OverTileCommand, ElementName=CurrentMap}"
+                                            CommandParameter="{Binding Coordinates}"/>
+                                    </i:EventTrigger>
+                                    <i:EventTrigger EventName="MouseLeave">
+                                        <i:InvokeCommandAction
+                                            Command="{Binding DataContext.OverTileCommand, ElementName=CurrentMap}"
+                                            CommandParameter="{x:Null}"/>
+                                    </i:EventTrigger>
+                                </i:Interaction.Triggers>
+                                
+                            </local:Tile>
+                        </ItemContainerTemplate>
+                    </ItemsControl.ItemTemplate>
+
+                </ItemsControl>
+
+                <!-- List of units on the map -->
+                <ItemsControl ItemsSource="{Binding Units}">
+
+                    <ItemsControl.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <Canvas/>
+                        </ItemsPanelTemplate>
+                    </ItemsControl.ItemsPanel>
+
+                    <ItemsControl.ItemContainerStyle>
+                        <Style TargetType="ContentPresenter">
+                            <Setter Property="IsHitTestVisible" Value="False"/>
+                            <Setter Property="Canvas.Left" Value="{Binding Coordinates, Converter={StaticResource AxialToPixel}, ConverterParameter=X}"/>
+                            <Setter Property="Canvas.Top" Value="{Binding Coordinates, Converter={StaticResource AxialToPixel}, ConverterParameter=Y}"/>
+                        </Style>
+                    </ItemsControl.ItemContainerStyle>
+
+                    <ItemsControl.ItemTemplate>
+                        <ItemContainerTemplate>
+                            <local:Unit Tag="{Binding}"/>
+                        </ItemContainerTemplate>
+                    </ItemsControl.ItemTemplate>
+
+                </ItemsControl>
+
+                <!-- List of reachable tiles on the map (relative to the selected unit) -->
+                <ItemsControl ItemsSource="{Binding ReachableTiles}">
+
+                    <ItemsControl.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <Canvas/>
+                        </ItemsPanelTemplate>
+                    </ItemsControl.ItemsPanel>
+
+                    <ItemsControl.ItemContainerStyle>
+                        <Style TargetType="ContentPresenter">
+                            <Setter Property="IsHitTestVisible" Value="False"/>
+                            <Setter Property="Canvas.Left" Value="{Binding Converter={StaticResource AxialToPixel}, ConverterParameter=X}"/>
+                            <Setter Property="Canvas.Top" Value="{Binding Converter={StaticResource AxialToPixel}, ConverterParameter=Y}"/>
+                        </Style>
+                    </ItemsControl.ItemContainerStyle>
+
+                    <ItemsControl.ItemTemplate>
+                        <ItemContainerTemplate>
+                            <local:ReachableTile Tag="{Binding}"/>
+                        </ItemContainerTemplate>
+                    </ItemsControl.ItemTemplate>
+
+                </ItemsControl>
+
+            </Canvas>
+            
+        </Grid>
+    </ScrollViewer>
+
+</UserControl>

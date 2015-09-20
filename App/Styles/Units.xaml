@@ -1,0 +1,106 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:styles="clr-namespace:SmallWorld.Styles">
+
+    <Style x:Key="BaseUnitGroup" TargetType="Polygon">
+        <Setter Property="Width" Value="{x:Static styles:Hexagon.Width}"/>
+        <Setter Property="Height" Value="{x:Static styles:Hexagon.Height}"/>
+        <Setter Property="Points" Value="{x:Static styles:Hexagon.Points}"/>
+        <Setter Property="SnapsToDevicePixels" Value="True"/>
+        <Setter Property="UseLayoutRounding" Value="True"/>
+        <Setter Property="RenderOptions.BitmapScalingMode" Value="NearestNeighbor"/>
+    </Style>
+
+    <Style x:Key="DwarfUnitGroup" TargetType="Polygon" BasedOn="{StaticResource BaseUnitGroup}">
+        <Setter Property="Fill">
+            <Setter.Value>
+                <ImageBrush Viewbox="0 0 136 156" ImageSource="/Resources/Images/UnitGroups.png" Stretch="None" ViewboxUnits="Absolute"/>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style x:Key="ElfUnitGroup" TargetType="Polygon" BasedOn="{StaticResource BaseUnitGroup}">
+        <Setter Property="Fill">
+            <Setter.Value>
+                <ImageBrush Viewbox="136 0 136 156" ImageSource="/Resources/Images/UnitGroups.png" Stretch="None" ViewboxUnits="Absolute"/>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style x:Key="KnightUnitGroup" TargetType="Polygon" BasedOn="{StaticResource BaseUnitGroup}">
+        <Setter Property="Fill">
+            <Setter.Value>
+                <ImageBrush Viewbox="272 0 136 156" ImageSource="/Resources/Images/UnitGroups.png" Stretch="None" ViewboxUnits="Absolute"/>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style x:Key="OrcUnitGroup" TargetType="Polygon" BasedOn="{StaticResource BaseUnitGroup}">
+        <Setter Property="Fill">
+            <Setter.Value>
+                <ImageBrush Viewbox="408 0 136 156" ImageSource="/Resources/Images/UnitGroups.png" Stretch="None" ViewboxUnits="Absolute"/>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style x:Key="SlimeUnitGroup" TargetType="Polygon" BasedOn="{StaticResource BaseUnitGroup}">
+        <Setter Property="Fill">
+            <Setter.Value>
+                <ImageBrush Viewbox="544 0 136 156" ImageSource="/Resources/Images/UnitGroups.png" Stretch="None" ViewboxUnits="Absolute"/>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style x:Key="NullUnitGroupFallback" TargetType="Polygon" BasedOn="{StaticResource ElfUnitGroup}"></Style>
+
+    <Style x:Key="BaseUnit" TargetType="Rectangle">
+        <Setter Property="Width" Value="50"/>
+        <Setter Property="Height" Value="55"/>
+        <Setter Property="SnapsToDevicePixels" Value="True"/>
+        <Setter Property="UseLayoutRounding" Value="True"/>
+        <Setter Property="RenderOptions.BitmapScalingMode" Value="NearestNeighbor"/>
+    </Style>
+
+    <Style x:Key="DwarfUnit" TargetType="Rectangle" BasedOn="{StaticResource BaseUnit}">
+        <Setter Property="Fill">
+            <Setter.Value>
+                <ImageBrush Viewbox="0 0 50 55" ImageSource="/Resources/Images/Units.png" Stretch="None" ViewboxUnits="Absolute"/>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style x:Key="ElfUnit" TargetType="Rectangle" BasedOn="{StaticResource BaseUnit}">
+        <Setter Property="Fill">
+            <Setter.Value>
+                <ImageBrush Viewbox="50 0 50 55" ImageSource="/Resources/Images/Units.png" Stretch="None" ViewboxUnits="Absolute"/>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style x:Key="KnightUnit" TargetType="Rectangle" BasedOn="{StaticResource BaseUnit}">
+        <Setter Property="Fill">
+            <Setter.Value>
+                <ImageBrush Viewbox="100 0 50 55" ImageSource="/Resources/Images/Units.png" Stretch="None" ViewboxUnits="Absolute"/>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style x:Key="OrcUnit" TargetType="Rectangle" BasedOn="{StaticResource BaseUnit}">
+        <Setter Property="Fill">
+            <Setter.Value>
+                <ImageBrush Viewbox="150 0 50 55" ImageSource="/Resources/Images/Units.png" Stretch="None" ViewboxUnits="Absolute"/>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style x:Key="SlimeUnit" TargetType="Rectangle" BasedOn="{StaticResource BaseUnit}">
+        <Setter Property="Fill">
+            <Setter.Value>
+                <ImageBrush Viewbox="200 0 50 55" ImageSource="/Resources/Images/Units.png" Stretch="None" ViewboxUnits="Absolute"/>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style x:Key="NullUnitFallback" TargetType="Rectangle" BasedOn="{StaticResource ElfUnit}"></Style>
+
+</ResourceDictionary>
